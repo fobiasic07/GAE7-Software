@@ -1,44 +1,33 @@
 <?php
+session_start();
+require __DIR__ . '/db_connect.php';
 
-    require __DIR__ . '/db_connect.php';
+$conn = connect();
+if ($conn != NULL) {
+    $email = $_POST["email"];
+    $password = $_POST["passwd"];
 
-    $conn = connect();
-    if ($conn != NULL){
-        $email = $_GET["email"];
-        $password = $_GET["passwd"];
+    //first check for user in users table then newcomers table
+    $stmt = $conn->prepare("SELECT id, email, pwd FROM students WHERE (email = :email)");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
 
-        //first check for user in users table then newcomers table
-        $stmt = $conn->prepare("SELECT email, pwd FROM users WHERE (email = :email)");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            // set the resulting array to associative
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            foreach($stmt as $row) {
-                if($password == $row['pwd'])
-                    echo 'Correct Password. Redirecting...';
-                else
-                    echo "Incorrect Password";
-            }
-        } else {
-            $stmt = $conn->prepare("SELECT email, pwd FROM newcomers WHERE (email = :email)");
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                // set the resulting array to associative
-                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                foreach($stmt as $row) {
-                    if($password == $row['pwd'])
-                        echo 'Correct Password. Redirecting...';
-                    else
-                        echo "Incorrect Password";
-                }
-            }
-            else{
-                echo 'Go see Ngugi';
-            }
+    if ($stmt->rowCount() > 0) {
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        foreach ($stmt as $row) {
+            if (password_verify($password, $row['pwd'])) {
+                $_SESSION['user_id'] = $row['id'];
+                header('Location: profile.php');
+                exit();
+            } else
+                echo "Incorrect Password";
         }
-            
+    } else {
+        echo 'Not found';
+        header('Location: applyacad.php');
+        exit();
     }
+}
+
+
 ?>

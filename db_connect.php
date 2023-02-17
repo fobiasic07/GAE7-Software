@@ -1,24 +1,22 @@
 <?php
 
+/**
+ * establishes a connection to the database
+ * @return PDO A PDO instance
+ */
+function connect(): PDO
+{
+	require_once 'db_credentials.php';
 
-function connect(){
+	$dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+	$attributes = array(
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+	);
 
-  $servername = "localhost:3308";
-  $username = "root";
-  $password = "";
-  $dbname = "gae";
-
-  try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $conn;
-  } catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-    return NULL;
-  }
+	try {
+		$connection = new PDO($dsn, DB_USER, DB_PASSWORD, $attributes);
+	} catch (PDOException $e) {
+		echo "Connection failed: " . $e->getMessage();
+	}
+	return $connection;
 }
-
-
-
-//to close the connection - $conn = null;

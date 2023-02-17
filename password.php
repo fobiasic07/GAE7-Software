@@ -9,8 +9,9 @@
  * 
  * @return string
  */
-function password($length) 
+function gen_password($length) 
 {
+
     $keyspace = '0123456789!@#$%&?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $str = '';
     $max = mb_strlen($keyspace, '8bit') - 1;
@@ -18,9 +19,18 @@ function password($length)
     for ($i = 0; $i < $length; ++$i) {
         $str .= $keyspace[random_int(0, $max)];
     }
-
+   
     return $str;
 }
 
-//echo random_str(10);
+/**
+ * Hash a password using php's password_hash method
+ * 
+ * @param string $password: the password to hash
+ */
+function hash_password($password)
+{
+    return password_hash($password, PASSWORD_DEFAULT);
+}
+
 ?>
