@@ -22,20 +22,20 @@
       <div class="card-title">
         <?php
         $form_header = "Gearbox Academy Account Login";
-        include_once 'formheader.php';
+        include_once 'loginformheader.php';
         ?>
       </div>
       <form action="verifylogin.php" method="post" class="card-body">
         <div>
-          <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+          <label for="email" class="form-label">Email or Name:</label>
+          <input type="text" class="form-control" id="email" placeholder="Enter email or name" name="email">
         </div>
         <div class="mb-3 mt-3">
           <label for="pwd" class="form-label">Password:</label>
           <input type="password" class="form-control" id="passwd" placeholder="Enter Password" name="passwd">
         </div>
 
-        <button type="submit" class="btn btn-primary center">Login</button>
+        <button type="submit" class="w-100 btn btn-outline-dark">Login</button>
       </form>
     </div>
   </div>

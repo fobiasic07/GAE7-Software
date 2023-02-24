@@ -1,33 +1,70 @@
 <?php
+
 session_start();
-require __DIR__ . '/db_connect.php';
 
-$conn = connect();
-if ($conn != NULL) {
-    $email = $_POST["email"];
-    $password = $_POST["passwd"];
+require_once 'db_connect.php';
 
-    //first check for user in users table then newcomers table
-    $stmt = $conn->prepare("SELECT id, email, pwd FROM students WHERE (email = :email)");
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
+$email = strtolower($_POST["email"]);
+$password = $_POST["passwd"];
 
-    if ($stmt->rowCount() > 0) {
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        foreach ($stmt as $row) {
-            if (password_verify($password, $row['pwd'])) {
-                $_SESSION['user_id'] = $row['id'];
-                header('Location: profile.php');
-                exit();
-            } else
-                echo "Incorrect Password";
-        }
-    } else {
-        echo 'Not found';
-        header('Location: applyacad.php');
-        exit();
-    }
+$sql_admin = "SELECT id, 
+                        LOWER(name) AS name, 
+        				email, 
+    					pwd 
+						FROM admins 
+						WHERE (email = :email) OR (name = :email)";
+
+$sql_student = "SELECT id, 
+    						LOWER(name) AS name, 
+   							email, 
+    						pwd 
+					FROM students 
+					WHERE (email = :email) OR (name = :email)";
+
+$user = check_user($sql_admin, $email);
+//first check for user in admins table then students table
+if (!$user) {
+	$user = check_user($sql_student, $email);
+	if (password_verify($password, $user->pwd)) {
+		set_session($user, FALSE);
+	} else
+		echo "Incorrect Password";
+} else {
+	if (password_verify($password, $user->pwd)) {
+		set_session($user, TRUE);
+	} else
+		echo "Incorrect Password";
+} /* else {
+ echo 'Not found';
+ header('Location: applyacad.php');
+ exit();
+ } */
+
+
+function check_user($sql, $email): mixed
+{
+	$conn = connect();
+	$stmt = $conn->prepare($sql);
+	$stmt->bindParam(':email', $email);
+	try {
+		$stmt->execute();
+		$stmt->setFetchMode(PDO::FETCH_OBJ);
+		$user = $stmt->fetch();
+		return $user;
+	} catch (PDOException $e) {
+		echo $e->getMessage();
+		return NULL;
+	}
+
 }
-
+function set_session($user, bool $admin)
+{
+	$_SESSION['user_id'] = $user->id;
+	$_SESSION['user_name'] = $user->name;
+	$_SESSION['is_admin'] = $admin;
+	$redir = ($admin) ? 'Location: adminprofile.php': 'Location: profile.php'; 
+	header($redir);
+	exit();
+}
 
 ?>
