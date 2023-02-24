@@ -4,7 +4,7 @@
  * establishes a connection to the database
  * @return PDO A PDO instance
  */
-function connect(): PDO
+function connect(): ?PDO
 {
 	require_once 'db_credentials.php';
 
