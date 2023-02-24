@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./evo-calendar.midnight-blue.min.css">
+    <link rel="stylesheet" href="./evo-calendar.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> GAE-7</title>
+</head>
+<body>
+   
+    <nav>
+        <div class="logo"> 
+            LOGO
+
+        </div>
+
+        <input id="nav-toggle" type="checkbox">
+
+        <ul class="links">
+            <li><a href="#section2" id="tab2">Home</a></li>
+            <li><a href="#data sheet">Data Sheet</a></li>
+            <li><a href="#section1" id="tab1">Calender</a></li>
+            <li><a href="#sign out">Sign Out</a></li>
+        </ul>
+
+        <label for="nav-toggle" class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </label>
+    
+    </nav>
+
+    <p class="bottom">
+        <section class="Groups">
+            <div class="groups">
+                <div id="R" class="r">Robotics</div>
+                <div id="CnI" class="cni">Cloud & IoT</div>
+                <div id="ML" class="ml">Machine Learning</div>
+                <div id="eML" class="eml">Machine Learning-Edge</div>
+                <div id="DDnF" class="ddnf">Design Fabrication</div>
+                <div id="Software" class="software">Software</div>
+                
+            </div>
+            
+            <div id="section1"></div>
+            
+
+    
+            
+        </section>
+
+
+        <section class="calendar">
+            
+            <div class=" hero">
+                <div id="calendar"></div>
+                
+                <div id="section2">Section 2 content</div>
+                
+                  <div>
+                        <script>
+                           document.querySelectorAll('a[id^="tab"]').forEach(function(tab) {
+                            tab.addEventListener("click", function(event) {
+                                event.preventDefault();
+                                document.querySelector(this.getAttribute("href")).scrollIntoView({
+                                behavior: "smooth"
+                                });
+                            });
+                            });
+
+                        </script>
+                        <script src="./evo-calendar.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script> 
+                        
+                        <script>
+                                // Initialize evo-calendar in your script file or an inline <script> tag
+                            $(document).ready(function() {
+                                $('#calendar').evoCalendar({
+                                   
+                                    theme:"Midnight Ble",
+
+                                    calendarEvents: [
+                                    {
+                                        id: 'event_1', // Event's ID (required)
+                                        name: "New Year", // Event name (required)
+                                        date: "January/1/2023", // Event date (required)
+                                        description: "HAPPY NEW YEAR!.", // Event description (optional)
+                                        type: "holiday", // Event type (required)
+                                        everyYear: true, // Same event every year (optional)
+                                        color: "#f20c0c" // Event custom color (optional)
+                                    },
+                                    {
+                                        id: 'trial',
+                                        name: "Robotics",
+                                        date: ["January/13/2023", "January/15/2023"], // Date range
+                                        description: "Vacation leave for 3 days.", 
+                                        type: "Vacation",
+                                        color: "#c92c3c" 
+                                    },
+                                    {
+                                        id: 'event_2',
+                                        name: "Robotics",
+                                        date: "Febuary/6/2023",
+                                        
+                                        description: "Vacation leave for 3 days.", 
+                                        type: "Vacation",
+                                        color: "#ff0000" 
+                                    },
+                                    {
+                                        id: 'event_2',
+                                        name: "Robotics",
+                                        date: "February/10/2023", // Date range
+                                        description: "Vacation leave for 3 days.", 
+                                        type: "Vacation",
+                                        color: "#ff0000" 
+                                    },
+                                    {
+                                        id: 'event_3',
+                                        name: "Cloud & IoT",
+                                        date: "February/6/2023", 
+                                        
+                                        description: "Vacation leave for 3 days.", 
+                                        type: "Vacation",
+                                        color: "#cc00ff" 
+                                    },
+                                    {
+                                        id: 'event_3',
+                                        name: "Cloud & IoT",
+                                        
+                                        date: "February/9/2023",
+                                        description: "Soma Tank", 
+                                        type: "Vacation",
+                                        color: "#cc00ff" 
+                                    },
+
+                                    {
+                                        id: 'event_4',
+                                        name: "Machine Learning",
+                                        date: "February/7/2023",  
+                                        description: "Vacation leave for 3 days.", 
+                                        type: "Vacation",
+                                        color: "#00ff00" 
+                                    },
+                                    {
+                                        id: 'event_5',
+                                        name: "Machine Learning-Edge",
+                                        date: "February/10/2023",  
+                                        description: "Vacation leave for 3 days.", 
+                                        type: "Vacation",
+                                        color: "#ff9900" 
+                                    },
+                                    {
+                                        id: 'event_6',
+                                        name: "Design Fabrication",
+                                        date: "February/7/2023",
+                                         
+                                        description: "Vacation leave for 3 days.", 
+                                        type: "Vacation",
+                                        color: "#0004ff" 
+                                    },
+                                    {
+                                        id: 'event_6',
+                                        name: "Design Fabrication",
+                                        date: "February/9/2023",
+                                         
+                                        description: "Arduino Board", 
+                                        type: "Vacation",
+                                        color: "#0004ff" 
+                                    },
+
+                                    {
+                                        id: 'event_6',
+                                        name: "Software",
+                                        date: "February/8/2023",  
+                                        description: "Vacation leave for 3 days.", 
+                                        type: "Vacation",
+                                        color: "#d0ff00" 
+                                    }
+
+
+                                    ]
+ 
+
+
+                                     
+                                })
+                            })
+                        </script>
+                        
+                    </div>
+             
+            </div>
+        </section>
+       
+        <section>
+            <h1> Socials </h1> <br>
+            <div class="socials">
+                
+                <ul>
+                    <a href="#" class="fa fa-facebook"></a> 
+                    <a href="#" class="fa fa-twitter"></a> 
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-linkedin"></a>
+                    <a href="#" class="fa fa-github"></a>
+                </ul>
+            </div>
+        </section>
+          
+    </p>
+
+    
+</body>
+
+</html>
