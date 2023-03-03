@@ -3,7 +3,7 @@
         <div class="mx-auto">
             <div class="border-bottom border-1 mx-4">
                 <span class="display-1">
-                    <?php echo $user->name; ?>
+                    <?php echo ucwords($user->name); ?>
                     <button class="btn btn-secondary btn-sm opacity-75"
                         style="--bs-btn-font-weight: 600; --bs-btn-font-size: .85rem;">
                         <div class="hstack gap-2">
@@ -135,7 +135,10 @@
 
                             </div>
                             <div id="projects" class="container tab-pane fade"><br>
+                                <?php
+                                    include_once 'profile_projects.php';
                                 
+                                ?>
                             </div>
                             <div id="commend" class="container tab-pane fade"><br>
                                 <p>Commendations</p>

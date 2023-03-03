@@ -18,6 +18,7 @@ session_start();
 <body>
 
     <div class="container px-4 py-5">
+    </div>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
                 <div class="card mb-3" style="max-width: 540px;">

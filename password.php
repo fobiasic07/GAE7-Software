@@ -34,3 +34,11 @@ function hash_password($password)
 }
 
 ?>
+<!-- <script>
+        function validate() {
+            var x = document.getElementById("passwd");
+            var y = document.getElementById("c_passwd");
+            if (x.value == y.value) return;
+            else alert("Passwords do not match");
+        }
+    </script> -->

@@ -9,6 +9,7 @@ function fetchUserDetailsByID(int $id)
         return;
     }
     $sql = "SELECT S.name, 
+                team_id,
                 T.name AS team, 
                 T.icon AS team_icon, 
                 institution, 
@@ -36,5 +37,7 @@ function fetchUserDetailsByID(int $id)
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
+
+     
 }
 ?>
